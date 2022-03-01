@@ -1,14 +1,10 @@
 body {
     text-align: center;
     background-color: lightgray;
-} 
-.container {
-    background-color: ivory;
-    border: solid;
 }
 a {
     color:orange;
-    font-size: 20px;
+    font-size: 50px;
     border: 3px black solid;
     background-color: khaki;
 }
