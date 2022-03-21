@@ -51,22 +51,21 @@ if(strlen($password) < 6){
 else{
     $hasPasswordCertainLength = true;
 }
+$sql_u = "SELECT * FROM users WHERE username='$username'";
+$sql_e = "SELECT * FROM users WHERE email='$email'";
+$res_u = mysqli_query($conn, $sql_u);
+$res_e = mysqli_query($conn, $sql_e);
 
-$user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
-$result = mysqli_query($conn, $user_check_query);
-$user = mysqli_fetch_assoc($result);
-
-if ($user['username'] === $username) {
+if (mysqli_num_rows($res_u) > 0) {
     $usernameOrEmailAlreadyExists = true;
     echo "Uzivatelske meno uz existuje" . "<br>";
-}
-
-if ($user['email'] === $email) {
+}	
+if(mysqli_num_rows($res_e) > 0){
     $usernameOrEmailAlreadyExists = true;
-    echo "Email uz bol pouzity" . "<br>";
+    echo "Email uz bol pouzity" . "<br>"; 
 }
 
-if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true && $usernameOrEmailAlreadyExists = false){
+if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true && $usernameOrEmailAlreadyExists == false){
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO users (username, surname, password, email) 
