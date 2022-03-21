@@ -4,6 +4,7 @@ $isEmpty = false;
 $hasPasswordCertainLength = true;
 $hasPasswordAtLeastOneNumber = true;
 $passwordAreSame = true;
+$usernameOrEmailAlreadyExists = false;
 
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -51,9 +52,23 @@ else{
     $hasPasswordCertainLength = true;
 }
 
-if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true){
+$user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
+$result = mysqli_query($conn, $user_check_query);
+$user = mysqli_fetch_assoc($result);
+
+if ($user['username'] === $username) {
+    $usernameOrEmailAlreadyExists = true;
+    echo "Uzivatelske meno uz existuje" . "<br>";
+}
+
+if ($user['email'] === $email) {
+    $usernameOrEmailAlreadyExists = true;
+    echo "Email uz bol pouzity" . "<br>";
+}
+
+if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true && $usernameOrEmailAlreadyExists = false){
     $hash = password_hash($password, PASSWORD_BCRYPT);
-    
+
     $sql = "INSERT INTO users (username, surname, password, email) 
     VALUES('$username', '$surname', '$hash', '$email')";
     if ($conn->query($sql) == true){       
