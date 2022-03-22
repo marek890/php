@@ -69,7 +69,7 @@ if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumbe
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO users (username, surname, password, email) 
-    VALUES('$username', '$surname', '$hash', '$email')";
+    VALUES('$username', '$surname', '$password', '$email')";
     if ($conn->query($sql) == true){       
         echo "Registracia bola uspesna";
     }
