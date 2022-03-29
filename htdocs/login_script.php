@@ -4,6 +4,7 @@ $isEmpty = false;
 
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = mysqli_real_escape_string($conn, $_POST['psw']);
+$hash = md5($_POST["psw"]);
 
 if (empty($username)) {
     $isEmpty = true;
@@ -17,10 +18,11 @@ if ($isEmpty == true) {
 }
 
 if ($isEmpty == false) {
-    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    $query = "SELECT * FROM users WHERE username='$username' AND password='$hash'";
     $results = mysqli_query($conn, $query);
     
     if (mysqli_num_rows($results) == 1) {
+
         echo "Uspesne si sa prihlasil" . "<br>";
     }
     else {

@@ -6,6 +6,7 @@ $hasPasswordAtLeastOneNumber = true;
 $passwordAreSame = true;
 $usernameOrEmailAlreadyExists = false;
 
+
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $surname = mysqli_real_escape_string($conn, $_POST['surname']);
@@ -32,7 +33,7 @@ if($isEmpty == true){
 
 if (!preg_match("/[0-9]/", $password)) {
     $hasPasswordAtLeastOneNumber = false;
-    echo "Heslo musi obsahovat aspon jeden ciselny znak" . "<br>";
+    header('Location: register.php?messages=Heslo musi obsahovat aspon jeden ciselny znak');
 }
 
 if($_POST["psw"] == $_POST["psw-repeat"]){
@@ -40,7 +41,7 @@ if($_POST["psw"] == $_POST["psw-repeat"]){
 }
 else{
     $passwordAreSame = false;
-    echo "Hesla sa nezhoduju" . "<br>";
+    header('Location: register.php?message=Hesla sa nezhoduju');
 }
 
 if(strlen($password) < 6){
@@ -65,10 +66,9 @@ if(mysqli_num_rows($res_e) > 0){
 }
 
 if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true && $usernameOrEmailAlreadyExists == false){
-    $hash = password_hash($password, PASSWORD_BCRYPT);
-
+    $hash = md5($_POST["psw"]);
     $sql = "INSERT INTO users (username, surname, password, email) 
-    VALUES('$username', '$surname', '$password', '$email')";
+    VALUES('$username', '$surname', '$hash', '$email')";
     if ($conn->query($sql) == true){       
         echo "Registracia bola uspesna";
     }
