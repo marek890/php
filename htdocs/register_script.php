@@ -33,7 +33,7 @@ if($isEmpty == true){
 
 if (!preg_match("/[0-9]/", $password)) {
     $hasPasswordAtLeastOneNumber = false;
-    header('Location: register.php?messages=Heslo musi obsahovat aspon jeden ciselny znak');
+    header('Location: register.php?message=Heslo musi obsahovat aspon jeden ciselny znak');
 }
 
 if($_POST["psw"] == $_POST["psw-repeat"]){
@@ -46,11 +46,12 @@ else{
 
 if(strlen($password) < 6){
     $hasPasswordCertainLength = false;
-    echo "Heslo musi mat minimalne 6 znakov" . "<br>";
-} 
+    header('Location: register.php?message=Heslo musi obsahovat minimalne 6 znakov');
+}
 else{
     $hasPasswordCertainLength = true;
 }
+
 $sql_u = "SELECT * FROM users WHERE username='$username'";
 $sql_e = "SELECT * FROM users WHERE email='$email'";
 $res_u = mysqli_query($conn, $sql_u);
@@ -58,11 +59,11 @@ $res_e = mysqli_query($conn, $sql_e);
 
 if (mysqli_num_rows($res_u) > 0) {
     $usernameOrEmailAlreadyExists = true;
-    echo "Uzivatelske meno uz existuje" . "<br>";
+    header('Location: register.php?message=Uzivatelske meno je uz obsadene');
 }	
 if(mysqli_num_rows($res_e) > 0){
     $usernameOrEmailAlreadyExists = true;
-    echo "Email uz bol pouzity" . "<br>"; 
+    header('Location: register.php?message=Email uz bol pouzity');
 }
 
 if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumber == true && $passwordAreSame == true && $usernameOrEmailAlreadyExists == false){
@@ -70,7 +71,7 @@ if($isEmpty == false && $hasPasswordCertainLength && $hasPasswordAtLeastOneNumbe
     $sql = "INSERT INTO users (username, surname, password, email) 
     VALUES('$username', '$surname', '$hash', '$email')";
     if ($conn->query($sql) == true){       
-        echo "Registracia bola uspesna";
+        header('Location: login.php?message=Registracia bola uspesna');
     }
     else{
         echo "Error" . $sql . "<br>" . $conn->error;

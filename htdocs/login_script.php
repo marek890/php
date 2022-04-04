@@ -14,7 +14,7 @@ if (empty($password)) {
 }
 
 if ($isEmpty == true) {
-    echo "Nieco si nezadal" . "<br>";
+    header('Location: login.php?message=Nieco si nezadal');
 }
 
 if ($isEmpty == false) {
@@ -22,11 +22,12 @@ if ($isEmpty == false) {
     $results = mysqli_query($conn, $query);
     
     if (mysqli_num_rows($results) == 1) {
-
-        echo "Uspesne si sa prihlasil" . "<br>";
+        session_start();
+        $_SESSION["username"] = $username;
+        header('Location: index.php');
     }
     else {
-        echo "Zadal si nespravne meno alebo heslo" . "<br>";
+        header('Location: login.php?message=Zadal si zle meno alebo heslo');
     }
 }
 ?>

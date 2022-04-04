@@ -12,10 +12,8 @@
 
 
   <body>
-  <?php include('./parts/header.php')?>
-  <?php $error = isset($_GET["message"]) ? $_GET["message"] : "";
-        $error2 = isset($_GET["messages"]) ? $_GET["messages"] : "";
-  ?>
+  <?php include('./parts/header.php');?>
+  <?php $message = isset($_GET["message"]) ? $_GET["message"] : "";?>
     <main>
       <form action="register_script.php" method="post">
 
@@ -42,8 +40,7 @@
           <p>
           <p style="font-weight: bolder;">Uz mate ucet?
           <p><a href="login.php" class="btn btn-info">Prihlaste sa</a></p>
-          <p class="text-danger"><?php echo $error ?></p>
-          <p class="text-danger"><?php echo $error2 ?></p>
+          <p class="text-danger"><?php echo $message ?></p>
         </div>
 
       </form>

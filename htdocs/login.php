@@ -2,7 +2,7 @@
 <html>
 <style>
   .container {
-      text-align: center;
+    text-align: center;
   }
   h1 {
     padding-top: 50px;
@@ -11,6 +11,7 @@
 </style> 
 <body>
 <?php include('./parts/header.php')?>
+<?php $message = isset($_GET["message"]) ? $_GET["message"] : "";?>
   <main>  
   <form action="login_script.php" method="post">
         <div class="container">
@@ -23,6 +24,7 @@
           <br><input type="password" placeholder="Zadajte Heslo" name="psw" id="psw" required>
       
           <p><button type="submit" class="btn btn-secondary">Prihlasit sa</button>
+          <p class="text-danger"><?php echo $message ?></p>
           <hr>
           <p style="font-weight: bolder;">Nemate ucet? <p><a href="register.php" class="btn btn-info">Zaregistrujte sa</a></p>
         </div>     
