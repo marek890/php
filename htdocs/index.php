@@ -4,6 +4,7 @@ include('./parts/header.php');
 include('getUsers.php');
 ?>
 <main class="container">
+    <h1 class="m-4 text-uppercase">Zoznam uživateľov</h1>
    <ul class="list-group">
        <li class="list-group-item list-group-item-action active d-flex row">
            <span class="col-1"> ID.</span>
