@@ -7,5 +7,6 @@ CREATE TABLE `users` (
 	`surname` VARCHAR(100),
 	`password` VARCHAR(100),
 	`email` VARCHAR(100),
+	`avatar` VARCHAR(100),
 	PRIMARY KEY (`id`)
 );

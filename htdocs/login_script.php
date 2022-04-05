@@ -24,7 +24,7 @@ if ($isEmpty == false) {
     if (mysqli_num_rows($results) == 1) {
         session_start();
         $_SESSION["username"] = $username;
-        header('Location: index.php');
+        header('Location: welcome.php');
     }
     else {
         header('Location: login.php?message=Zadal si zle meno alebo heslo');
