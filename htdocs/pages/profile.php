@@ -27,7 +27,9 @@ include('../scripts/profile_script.php');
             <span class="col-3"> <?php echo $user["surname"] ?></span>
             <span class="col-3"> <?php echo $user["email"] ?></span>
         </li>
-        <?php endforeach ?>
-        <a href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
+    <?php endforeach ?>
+        <div style="text-align: center; margin-top: 100px;" >
+            <a href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
+        </div>
 </main>
 <?php include('../parts/footer.php'); ?>
