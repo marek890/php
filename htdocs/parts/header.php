@@ -3,7 +3,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <head>
-<?php session_start();?>
+<?php 
+session_start();
+?>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,15 +22,17 @@
                     </ul>
                     <?php if (!isset($_SESSION["username"])) : ?>
                         <div>
-                            <a href="register.php" class="btn btn-danger">Registracia</a>
-                            <a href="login.php" class="btn btn-success">Prihlasenie</a>
+                            <a href="../pages/register.php" class="btn btn-danger">Registracia</a>
+                            <a href="../pages/login.php" class="btn btn-success">Prihlasenie</a>
                         </div>
                     <?php else : ?>
                         <div class="d-flex align-items-center">
                             <p class="text-light mx-3 mb-0">
-                                <?php echo $_SESSION["username"]; ?>
+                                <?php include('../scripts/session.php');?>
+                                <a href="../pages/profile.php<?php  echo "?user=".$id;?>"class="text-decoration-none text-light"><?php echo $user; ?>
+                                <a href="../pages/profile.php<?php  echo "?user=".$id;?>"class="text-decoration-none"> <img src="../images/<?php  echo $avatar;?>"   style="width: 40px">
                             </p>
-                            <a href="logout.php" class="btn btn-danger">Odhlasenie</a>
+                            <a href="../scripts/logout.php" class="btn btn-danger">Odhlasenie</a>
                         </div>
                     <?php endif; ?>
                 </div>
