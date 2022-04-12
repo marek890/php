@@ -36,8 +36,8 @@ include('../scripts/profile_script.php');
                 <div class="col-4 list-group-item active">Email</div>
                 <div class="col-4 list-group-item"><?php echo $user["email"] ?></div>
                 <div style="text-align: center; margin-top: 50px;">
-        <a href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
-    </div>
+                <a href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
+                </div>
                 </div>
                 
                 </div>
