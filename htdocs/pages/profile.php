@@ -14,7 +14,11 @@ include('../scripts/profile_script.php');
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-4"><img src="../images/<?php echo $user["avatar"] ?>" alt="<?php echo $user["username"] ?>" style="width: 300px;">
-                    <a href="../pages/avatar_change.php" class="btn btn-info" style="margin-left: 70px; margin-top: 20px;">Zmenit avatara</a>
+                    <?php if (isset($_SESSION["username"])) :
+                        if ($_SESSION["username"] == $user["username"]) :?>
+                            <a href="../pages/avatar_change.php" class="btn btn-info" style="margin-left: 70px; margin-top: 20px;">Zmenit avatara</a>
+                    <?php endif;
+                    endif; ?>
                 </div>
                 <div class="col-6">
                     <p>
@@ -38,9 +42,11 @@ include('../scripts/profile_script.php');
                         <div class="col-4 list-group-item active">Email</div>
                         <div class="col-4 list-group-item"><?php echo $user["email"] ?></div>
                         <div style="text-align: center; margin-top: 50px;">
-                        <?php if (isset($_SESSION["username"])) : ?>
-                            <a style="margin-right: 200px;" href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
-                        <?php endif; ?>
+                            <?php if (isset($_SESSION["username"])) :
+                                if ($_SESSION["username"] == $user["username"]) :?>
+                                    <a style="margin-right: 200px;" href="../pages/password_change.php" class="btn btn-danger">Zmenit heslo</a>
+                            <?php endif;
+                            endif; ?>
                         </div>
                     </div>
 
